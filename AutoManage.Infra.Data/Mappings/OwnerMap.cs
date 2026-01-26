@@ -26,6 +26,9 @@ namespace AutoManage.Infra.Data.Mappings
 
             builder.Navigation(x => x.CpfCnpj).IsRequired();
 
+            builder.HasIndex(x => x.CpfCnpj.Value)
+                .IsUnique();
+
             builder.Property(x => x.Address)
                 .IsRequired()
                 .HasMaxLength(250);
