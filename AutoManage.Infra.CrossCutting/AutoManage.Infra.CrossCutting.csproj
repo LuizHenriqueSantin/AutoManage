@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AutoManage.Application\AutoManage.Application.csproj" />
+    <ProjectReference Include="..\AutoManage.Domain\AutoManage.Domain.csproj" />
+    <ProjectReference Include="..\AutoManage.Infra.Data\AutoManage.Infra.Data.csproj" />
+  </ItemGroup>
+
+</Project>
