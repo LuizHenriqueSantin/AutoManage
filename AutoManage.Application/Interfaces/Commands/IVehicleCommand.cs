@@ -8,5 +8,6 @@ namespace AutoManage.Application.Interfaces.Commands
     public interface IVehicleCommand : IBaseCommand<VehicleOut, VehicleIn, Vehicle>
     {
         Task<(bool Success, DomainNotification? Notification)> UpdateOwner(Guid vehicleId, Guid ownerId);
+        Task<(bool Success, DomainNotification? Notification)> RemoveOwner(Guid vehicleId);
     }
 }

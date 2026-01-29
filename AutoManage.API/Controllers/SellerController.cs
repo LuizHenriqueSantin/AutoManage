@@ -48,16 +48,16 @@ namespace AutoManage.API.Controllers
         }
 
         [HttpPatch("UpdateSellerOfTheMonth")]
-        public async Task<IActionResult> UpdateSellerOfTheMonth([FromQuery] int year, [FromQuery] int month)
+        public async Task<IActionResult> UpdateSellerOfTheMonth()
         {
-            await _command.UpdateSellerOfTheMonth(year, month);
+            await _command.UpdateSellerOfTheMonth();
             return OkResponse();
         }
 
         [HttpGet("GetSellerWithTotalSalary")]
-        public async Task<IActionResult> GetSellerWithTotalSalary([FromQuery] Guid id, [FromQuery] int? year, [FromQuery] int? month)
+        public async Task<IActionResult> GetSellerWithTotalSalary([FromQuery] Guid id)
         {
-            var result = await _query.GetSellerWithTotalSalary(id, year, month);
+            var result = await _query.GetSellerWithTotalSalary(id);
             return OkResponse(result);
         }
     }

@@ -55,5 +55,10 @@ namespace AutoManage.Domain.Entities
         {
             OwnerId = ownerId;
         }
+
+        public void CancelSale()
+        {
+            OwnerId = Guid.Empty;
+        }
     }
 }

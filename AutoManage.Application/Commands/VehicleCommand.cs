@@ -108,6 +108,19 @@ namespace AutoManage.Application.Commands
             return (true, null);
         }
 
+        public async Task<(bool Success, DomainNotification? Notification)> RemoveOwner(Guid vehicleId)
+        {
+            var entity = await _repository.GetById(vehicleId);
+
+            if (entity is null)
+                return (false, new DomainNotification("Vehicle", "Veículo não encontrado!"));
+
+            entity.CancelSale();
+            _repository.Update(entity);
+
+            return (true, null);
+        }
+
         private bool ValidateCreation(VehicleIn model)
         {
             if (model == null)

@@ -6,6 +6,6 @@ namespace AutoManage.Application.Interfaces.Queries
 {
     public interface ISellerQuery : IBaseQuery<SellerOut, SellerIn, Seller>
     {
-        Task<SellerOut?> GetSellerWithTotalSalary(Guid id, int? year, int? month);
+        Task<SellerOut?> GetSellerWithTotalSalary(Guid id);
     }
 }

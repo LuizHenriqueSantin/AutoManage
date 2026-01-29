@@ -79,8 +79,13 @@ namespace AutoManage.Application.Commands
             return await _unitOfWork.Commit();
         }
 
-        public async Task<bool> UpdateSellerOfTheMonth(int year, int month)
+        public async Task<bool> UpdateSellerOfTheMonth()
         {
+            var today = DateTime.Now;
+
+            int year = today.Year;
+            int month = today.Month;
+
             var newBestSeller = await _repository.GetTopSeller(year, month);
 
             if (newBestSeller == null)

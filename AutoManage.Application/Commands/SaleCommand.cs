@@ -51,6 +51,14 @@ namespace AutoManage.Application.Commands
                 return false;
             }
 
+            var (success, notification) = await _vehicleCommand.RemoveOwner(entity.VehicleId);
+
+            if(!success && notification != null)
+            {
+                _notifications.Add(notification);
+                return false;
+            }
+
             _repository.Delete(entity);
 
             return await _unitOfWork.Commit();

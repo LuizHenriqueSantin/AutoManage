@@ -6,6 +6,6 @@ namespace AutoManage.Application.Interfaces.Commands
 {
     public interface ISellerCommand : IBaseCommand<SellerOut, SellerIn, Sale>
     {
-        Task<bool> UpdateSellerOfTheMonth(int year, int month);
+        Task<bool> UpdateSellerOfTheMonth();
     }
 }

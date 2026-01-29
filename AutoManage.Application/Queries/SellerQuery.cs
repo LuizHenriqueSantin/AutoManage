@@ -24,14 +24,14 @@ namespace AutoManage.Application.Queries
                 }).ToList();
         }
 
-        public async Task<SellerOut?> GetSellerWithTotalSalary(Guid id, int? year, int? month)
+        public async Task<SellerOut?> GetSellerWithTotalSalary(Guid id)
         {
             var today = DateTime.Now;
 
-            year ??= today.Year;
-            month ??= today.Month;
+            int year = today.Year;
+            int month = today.Month;
 
-            var entity = await _repository.GetWithMensalSalesToRead(id, year.Value, year.Value);
+            var entity = await _repository.GetWithMensalSalesToRead(id, year, month);
 
             if (entity == null) return null;
 
