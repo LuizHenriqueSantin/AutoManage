@@ -21,6 +21,7 @@ namespace AutoManage.Application.Queries
 
             return list.Select(x => new VehicleOut
                 {
+                    Id = x.Id,
                     Chassis = x.Chassis,
                     Model = x.Model,
                     Year = x.Year,

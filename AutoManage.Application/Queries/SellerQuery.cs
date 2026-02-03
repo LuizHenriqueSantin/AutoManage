@@ -19,6 +19,7 @@ namespace AutoManage.Application.Queries
 
             return list.Select(x => new SellerOut
                 {
+                    Id = x.Id,
                     Name = x.Name,
                     BaseSalary = x.BaseSalary,
                 }).ToList();

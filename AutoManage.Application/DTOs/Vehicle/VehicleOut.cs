@@ -6,6 +6,7 @@ namespace AutoManage.Application.DTOs.Vehicle
 {
     public class VehicleOut
     {
+        public Guid Id { get; set; }
         public string? Chassis { get; set; }
         public string? Model { get; set; }
         public int Year { get; set; }

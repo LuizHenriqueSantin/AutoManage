@@ -19,6 +19,7 @@ namespace AutoManage.Application.Queries
 
             return list.Select(x => new OwnerOut
                 {
+                    Id = x.Id,
                     Name = x.Name,
                     CpfCnpj = x.CpfCnpj != null ? x.CpfCnpj.ToString() : string.Empty,
                     Address = x.Address,

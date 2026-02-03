@@ -19,6 +19,7 @@ namespace AutoManage.Application.Queries
 
             return list.Select(x => new SaleOut
                 {
+                    Id = x.Id,
                     VehicleChassis = x.Vehicle?.Chassis,
                     SellerName = x.Seller?.Name,
                     SaleDate = x.SaleDate,
