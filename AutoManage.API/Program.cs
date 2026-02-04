@@ -1,11 +1,11 @@
 using AutoManage.API.Filters;
+using AutoManage.API.Middlewares;
 using AutoManage.Infra.CrossCutting.IoC;
 using AutoManage.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -17,6 +17,8 @@ builder.Services.AddControllers(options =>
 });
 
 var app = builder.Build();
+
+app.UseMiddleware<GlobalExceptionMiddleware>();
 
 using (var scope = app.Services.CreateScope())
 {

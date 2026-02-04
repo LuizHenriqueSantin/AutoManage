@@ -12,8 +12,6 @@ namespace AutoManage.Infra.Data.Repositories
 
         public async Task<IList<Sale>> GetBySeller(Guid sellerId, int year, int month)
         {
-            try
-            {
                 return await _context.Sales
                     .AsNoTracking()
                     .Where(x =>
@@ -21,11 +19,6 @@ namespace AutoManage.Infra.Data.Repositories
                         x.SaleDate.Month == month &&
                         x.SaleDate.Year == year)
                     .ToListAsync();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Erro ao buscar vendas do vendedor!", ex);
-            }
         }
     }
 }

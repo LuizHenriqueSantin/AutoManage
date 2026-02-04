@@ -13,45 +13,24 @@ namespace AutoManage.Infra.Data.Repositories
 
         public async Task<Vehicle?> GetByChassis(string chassis)
         {
-            try
-            {
                 return await _context.Vehicles
                     .FirstOrDefaultAsync(x => x.Chassis == chassis);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Erro ao buscar veículo pelo chassi!", ex);
-            }
         }
 
         public async Task<Vehicle?> GetWithOwner(Guid id)
         {
-            try
-            {
                 return await _context.Vehicles
                     .AsNoTracking()
                     .Include(x => x.Owner)
                     .FirstOrDefaultAsync(x => x.Id == id);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Erro ao buscar veículo e vendedor!", ex);
-            }
         }
 
         public async Task<IList<Vehicle>> GetBySystemVersion(SystemVersion version)
         {
-            try
-            {
                 return await _context.Vehicles
                     .AsNoTracking()
                     .Where(x => x.SystemVersion == version)
                     .ToListAsync();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Erro ao buscar veículos pela versão do sistema!", ex);
-            }
         }
     }
 }

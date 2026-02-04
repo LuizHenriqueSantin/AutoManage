@@ -13,8 +13,6 @@ namespace AutoManage.Infra.Data.Repositories
 
         public async Task<Owner?> GetByCpfCnpj(string cpfCnpj)
         {
-            try
-            {
                 var normalized = CpfCnpj.Create(cpfCnpj);
 
                 if (!normalized.IsValid)
@@ -23,23 +21,11 @@ namespace AutoManage.Infra.Data.Repositories
                 return await _context.Owners
                     .AsNoTracking()
                     .FirstOrDefaultAsync(x => x.CpfCnpj.Value == normalized.Value);
-            }
-            catch (DbUpdateException ex)
-            {
-                throw new DbUpdateException("Erro ao buscar proprietário por cpf/cnpj!", ex);
-            }
         }
 
         public async Task<Owner?> GetWithVehicles(Guid id)
         {
-            try
-            {
                 return await _context.Owners.Include(x => x.Vehicles).FirstOrDefaultAsync(x => x.Id == id);
-            }
-            catch (DbUpdateException ex)
-            {
-                throw new DbUpdateException("Erro ao buscar proprietários e veículos!", ex);
-            }
         }
     }
 }
