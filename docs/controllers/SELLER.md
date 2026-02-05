@@ -1,3 +1,5 @@
+[⬅️ Voltar ao Guia Principal](../ROTAS.md)
+
 # 👥 Gerenciamento de Vendedores (Sellers)
 ## POST /api/Seller/Create
 Realiza o cadastro de um novo vendedor no sistema.
