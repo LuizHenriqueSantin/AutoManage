@@ -17,7 +17,7 @@ Atualiza o salário de um vendedor existente.
 
 > **Regras de negócio:**
 > * O novo salário base deve ser superior ao atual.
-> * Embora o DTO aceito o campo 'Name', ele é ignorado nesta rota para garantir a consistência do registro original do vendedor.
+> * Embora o DTO aceite o campo 'Name', ele é ignorado nesta rota para garantir a consistência do registro original do vendedor.
 
 ## DELETE /api/Seller/Delete?id={sellerId}
 Deleta um vendedor existente do sistema.
@@ -42,12 +42,10 @@ Retorna os dados do vendedor e o seu salário total referente ao mês atual (sal
 > * **TotalSalary:** Salário total do vendedor. (decimal)
 
 ## PATCH /api/Seller/UpdateSellerOfTheMonth
-Compara as vendas do mes de todos os vendedores e seleciona o vendedor que teve o maior valor vendido como "Vendedor do mês".
-
-> **Entrada:**
-> * Não recebe nenhum parâmetro.
+Processamento mensal para definição de destaque.
 
 > **Regras de negócio:**
-> * O vendedor selecionado como vendedor do mês recebe um aumento na comissão das vendas no próximo mês.
-> * Deve ser utilizado apenas no final do mês, preferencialmente em um Job executado automaticamente.
-> * Em caso de empate, o vendedor será selecionado em ordem alfabética entre os vendedores empatados.
+> * **Critério de Seleção:** Maior valor bruto total vendido no mês atual.
+> * **Desempate:** Em caso de valores idênticos, o critério de desempate é a **ordem alfabética**.
+> * **Benefício:** O vendedor eleito recebe bonificação percentual em todas as comissões do mês subsequente.
+> * **Uso Recomendado:** Execução via Job automático (ex: Hangfire ou Azure Functions) ao final de cada mês.
