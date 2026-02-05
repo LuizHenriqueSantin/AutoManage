@@ -61,5 +61,12 @@ namespace AutoManage.API.Controllers
             var result = await _query.GetWithOwner(id);
             return OkResponse(result);
         }
+
+        [HttpPatch("UpdateByChassis")]
+        public async Task<IActionResult> UpdateByChassis([FromBody] VehicleIn model)
+        {
+            await _command.UpdateByChassis(model);
+            return OkResponse();
+        }
     }
 }

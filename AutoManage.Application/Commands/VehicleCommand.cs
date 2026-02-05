@@ -65,15 +65,15 @@ namespace AutoManage.Application.Commands
             return await FinishUpdate(model, entity);
         }
 
-        public async Task<bool> UpdateByChassis(string chassis, VehicleIn model)
+        public async Task<bool> UpdateByChassis(VehicleIn model)
         {
-            if (model == null || (model.Price == null && model.Mileage == null))
+            if (model == null || model.Chassis == null || (model.Price == null && model.Mileage == null))
             {
                 _notifications.Add(new DomainNotification("Vehicle", "Envie as informações do veículo!"));
                 return false;
             }
 
-            var entity = await _repository.GetByChassis(chassis);
+            var entity = await _repository.GetByChassis(model.Chassis);
 
             return await FinishUpdate(model, entity);
         }

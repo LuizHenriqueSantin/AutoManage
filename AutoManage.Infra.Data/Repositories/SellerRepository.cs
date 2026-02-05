@@ -21,6 +21,7 @@ namespace AutoManage.Infra.Data.Repositories
                             .Sum(y => y.FinalPrice)
                     })
                     .OrderByDescending(x => x.TotalSales)
+                    .ThenBy(x => x.Seller.Name)
                     .FirstOrDefaultAsync();
 
                 return query?.Seller;
