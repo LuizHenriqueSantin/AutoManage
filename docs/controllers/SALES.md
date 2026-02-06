@@ -39,12 +39,12 @@ Retorna os dados base de todas as vendas cadastradas.
 > * **FinalPrice:** Preço final da venda. (decimal)
 
 ## GET /api/Sale/GetBySeller?sellerId={sellerId}&year={year}&month={month}
-Retorna todas as vendas realizadas por um vendedor em determinado mês.
+Retorna as vendas de um vendedor, filtradas por período (mês/ano) ou referentes ao período atual.
 
 > **Entrada (Query):**
 > * **SellerId:** Id do vendedor. (Guid) (obrigatório)
-> * **Year:** Ano desejado para o filtro. (int) (obrigatório)
-> * **Month:** Mês desejado para o filtro. (int) (obrigatório)
+> * **Year:** Ano desejado para o filtro. (int) (opcional)
+> * **Month:** Mês desejado para o filtro. (int) (opcional)
 
 > **Retorno:**
 > * **Id:** Id da venda no sistema. (Guid)
@@ -52,3 +52,7 @@ Retorna todas as vendas realizadas por um vendedor em determinado mês.
 > * **SellerName:** Nome do vendedor. (string)
 > * **SaleDate:** Data em que a venda foi realizada. (DateTime)
 > * **FinalPrice:** Preço final da venda. (decimal)
+
+> **Regras de negócio:**
+> * **Ano não informado:** O sistema filtrará pelo ano atual.
+> * **Mês não informado:** O sistema filtrará pelo mês atual.
