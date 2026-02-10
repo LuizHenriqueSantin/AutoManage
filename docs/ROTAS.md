@@ -4,11 +4,15 @@ Este guia descreve as funcionalidades de cada endpoint, os parâmetros esperados
 ## 🚦 Padrões de Resposta (Status Codes)
 Para manter a consistência, todas as rotas da API seguem este padrão de retorno:
 
-> ✅ **Sucesso (200/201):** Operação realizada com êxito.
+> ✅ **200 - OK:** Operação realizada com sucesso e retorno de dados.
 
-> ⚠️ **Validação (400 - Bad Request):** Erro de regra de negócio ou dados inválidos. A resposta contém o motivo detalhado via Domain Notifications.
+> 🚀 **201 - Created:** Registro criado com sucesso.
 
-> 🚨 **Erro Crítico (500 - Internal Server Error):** Falha inesperada tratada pelo nosso Global Exception Middleware.
+> 📥 **204 - No Content:** Deleção realizada com sucesso.
+
+> ⚠️ **400 - Bad Request:** Erro de regra de negócio ou dados inválidos. A resposta contém o motivo detalhado via Domain Notifications.
+
+> 🚨 **500 - Internal Server Error:** Falha inesperada tratada pelo Global Exception Middleware.
 
 ---
 
