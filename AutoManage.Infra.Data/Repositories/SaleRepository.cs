@@ -14,6 +14,8 @@ namespace AutoManage.Infra.Data.Repositories
         {
                 return await _context.Sales
                     .AsNoTracking()
+                    .Include(x => x.Vehicle)
+                    .Include(x => x.Seller)
                     .Where(x =>
                         x.SellerId == sellerId &&
                         x.SaleDate.Month == month &&

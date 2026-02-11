@@ -22,7 +22,9 @@ namespace AutoManage.Application.Commands
 
         public async Task<bool> Create(OwnerIn model)
         {
-            if(!ValidateCreation(model))
+            var isValid = await ValidateCreation(model);
+
+            if(!isValid)
                 return false;
 
             var entity = new Owner(model.Name, model.Address);
@@ -88,7 +90,7 @@ namespace AutoManage.Application.Commands
             return await _unitOfWork.Commit();
         }
 
-        private bool ValidateCreation(OwnerIn model)
+        private async Task<bool> ValidateCreation(OwnerIn model)
         {
             if (model == null)
             {
@@ -111,8 +113,14 @@ namespace AutoManage.Application.Commands
             if (string.IsNullOrWhiteSpace(model.PhoneNumber))
                 _notifications.Add(new DomainNotification("PhoneNumber", "Telefone é obrigatório!"));
 
-            if (!string.IsNullOrEmpty(model.CpfCnpj) && _repository.GetByCpfCnpj(model.CpfCnpj) != null)
-                _notifications.Add(new DomainNotification("CpfCnpj", "Proprietário ja cadastrado para esse CPF/CNPJ!"));
+            if (!string.IsNullOrEmpty(model.CpfCnpj))
+            {
+                var isDuplicate = await _repository.GetByCpfCnpj(model.CpfCnpj) != null;
+                if (isDuplicate)
+                {
+                    _notifications.Add(new DomainNotification("CpfCnpj", "Proprietário ja cadastrado para esse CPF/CNPJ!"));
+                }
+            }
 
             if (_notifications.HasNotifications())
                 return false;
@@ -122,14 +130,14 @@ namespace AutoManage.Application.Commands
 
         private bool ValidateValueObjects((bool Success, string Message) cpfCnpj, (bool Success, string Message) email, (bool Success, string Message) phone)
         {
-            if(cpfCnpj.Success && cpfCnpj.Message != string.Empty)
+            if (!cpfCnpj.Success && cpfCnpj.Message != string.Empty)
                 _notifications.Add(new DomainNotification("CpfCnpj", cpfCnpj.Message));
 
-            if (email.Success && email.Message != string.Empty)
+            if (!email.Success && email.Message != string.Empty)
                 _notifications.Add(new DomainNotification("Email", email.Message));
 
-            if (phone.Success && phone.Message != string.Empty)
-                _notifications.Add(new DomainNotification("Email", phone.Message));
+            if (!phone.Success && phone.Message != string.Empty)
+                _notifications.Add(new DomainNotification("PhoneNumber", phone.Message));
 
             if (_notifications.HasNotifications())
                 return false;
