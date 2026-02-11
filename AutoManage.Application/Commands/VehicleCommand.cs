@@ -22,7 +22,9 @@ namespace AutoManage.Application.Commands
 
         public async Task<bool> Create(VehicleIn model)
         {
-            if (!ValidateCreation(model))
+            var isValid = await ValidateCreation(model);
+
+            if (!isValid)
                 return false;
 
             var entity = new Vehicle(model.Chassis, model.Model, model.Year.Value, model.Color.Value, model.Price.Value, model.Mileage.Value, model.SystemVersion.Value);
@@ -121,7 +123,7 @@ namespace AutoManage.Application.Commands
             return (true, null);
         }
 
-        private bool ValidateCreation(VehicleIn model)
+        private async Task<bool> ValidateCreation(VehicleIn model)
         {
             if (model == null)
             {
@@ -149,6 +151,16 @@ namespace AutoManage.Application.Commands
 
             if (model.SystemVersion.HasValue)
                 _notifications.Add(new DomainNotification("SystemVersion", "Versão do sistema é obrigatória!"));
+
+            if (!string.IsNullOrEmpty(model.Chassis))
+            {
+                var isDuplicated = await _repository.GetByChassis(model.Chassis) != null;
+                if (isDuplicated)
+                {
+                    _notifications.Add(new DomainNotification("Chassis", "Veículo ja cadastrado para esse chassi!"));
+                }
+
+            }
 
             if (_notifications.HasNotifications())
                 return false;
