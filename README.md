@@ -41,6 +41,9 @@ O projeto utiliza uma divisão clara em camadas para garantir que a Lógica de D
 > **Infrastructure:** Implementação técnica. Contém o DbContext, Repositórios e configurações do Entity Framework.
 
 > **API:** A porta de entrada. Gerencia as rotas, Injeção de Dependência e Middlewares.
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/94195d56-c6bc-4073-ad82-3890ee666a98" />
+
+
 
 ## 💎 Value Objects
 Em vez de usar apenas tipos primitivos, utilizei Value Objects para garantir a integridade dos dados:
@@ -65,6 +68,9 @@ O projeto faz uso extensivo de Injeção de Dependência nativa do .NET para des
 > **Migrations:** O histórico de evolução do banco é mantido via migrations.
 
 > **Fluent API:** As configurações de tabelas e relacionamentos não "poluem" as classes de domínio, ficando isoladas na camada de Infra.Data.Mapping.
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/9cee7ef1-a290-4572-8a4b-70d804330367" />
+
+
 
 ## 📖 Documentação de Referência
 Para facilitar o entendimento das regras de negócio e integração, a documentação está dividida em duas partes:
